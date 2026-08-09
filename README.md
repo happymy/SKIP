@@ -22,7 +22,13 @@ SKIP 是一款免费开源的安卓应用，旨在利用安卓无障碍服务帮
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=GuoXiCheng/SKIP&type=Date)](https://star-history.com/#GuoXiCheng/SKIP&Date)
+<a href="https://www.star-history.com/?repos=GuoXiCheng%2FSKIP&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=GuoXiCheng/SKIP&type=date&theme=dark&legend=top-left&sealed_token=A2-bonTSUbt1ikMAft77ZB2wFf5oAbd_v8rSpnTATyoZZu3dSXnBgYJvA4ryBg3m5I38hpeT1Afcw1jLrmpvOUCBLNlIPxcactLjPbIKL_C3JLEs-Je57yQ7yh2QiGPzdhKve1wc_zVKuOZ43YbfHOzedGtx33fbhL5yQFQ2kDxNAC7bXe-wHpECR8qC" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=GuoXiCheng/SKIP&type=date&legend=top-left&sealed_token=A2-bonTSUbt1ikMAft77ZB2wFf5oAbd_v8rSpnTATyoZZu3dSXnBgYJvA4ryBg3m5I38hpeT1Afcw1jLrmpvOUCBLNlIPxcactLjPbIKL_C3JLEs-Je57yQ7yh2QiGPzdhKve1wc_zVKuOZ43YbfHOzedGtx33fbhL5yQFQ2kDxNAC7bXe-wHpECR8qC" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=GuoXiCheng/SKIP&type=date&legend=top-left&sealed_token=A2-bonTSUbt1ikMAft77ZB2wFf5oAbd_v8rSpnTATyoZZu3dSXnBgYJvA4ryBg3m5I38hpeT1Afcw1jLrmpvOUCBLNlIPxcactLjPbIKL_C3JLEs-Je57yQ7yh2QiGPzdhKve1wc_zVKuOZ43YbfHOzedGtx33fbhL5yQFQ2kDxNAC7bXe-wHpECR8qC" />
+ </picture>
+</a>
 
 ## 自定义规则订阅
 
