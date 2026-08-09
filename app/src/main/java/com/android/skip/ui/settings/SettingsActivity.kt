@@ -1,7 +1,5 @@
 package com.android.skip.ui.settings
 
-import android.app.ActivityManager
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -24,6 +22,9 @@ import com.android.skip.ui.components.expandMenuItems
 import com.android.skip.ui.components.notification.NotificationDialog
 import com.android.skip.ui.components.notification.NotificationDialogViewModel
 import com.android.skip.ui.settings.custom.CustomButton
+import com.android.skip.ui.settings.log.SkipLogActivity
+import com.android.skip.ui.settings.log.SkipLogButton
+import com.android.skip.ui.settings.log.SkipLogViewModel
 import com.android.skip.ui.settings.recent.RecentButton
 import com.android.skip.ui.settings.recent.RecentViewModel
 import com.android.skip.ui.settings.strict.StrictButton
@@ -56,6 +57,8 @@ class SettingsActivity : AppCompatActivity() {
 
     private val autoUpdateViewModel by viewModels<AutoUpdateViewModel>()
 
+    private val skipLogViewModel by viewModels<SkipLogViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -66,6 +69,9 @@ class SettingsActivity : AppCompatActivity() {
                     RecentButton(recentViewModel)
                     TipButton(tipViewModel)
                     StrictButton(strictViewModel)
+                    SkipLogButton(skipLogViewModel) {
+                        startActivity(Intent(this, SkipLogActivity::class.java))
+                    }
                     CustomButton(configViewModel) {
                         val intent = Intent(this, WebViewActivity::class.java).apply {
                             putExtra("url", R.string.settings_custom_config_url)

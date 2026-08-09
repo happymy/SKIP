@@ -10,7 +10,8 @@
     <string name="inspect_record_title">布局检查记录</string>
     <string name="inspect_record_subtitle">当前存在 %1$s 条记录</string>
     <string name="inspect_function_intro">功能介绍</string>
-    <string name="inspect_function_intro_url">https://skip.guoxicheng.top/advance/layout-inspect/intro</string>
+    <string name="inspect_function_intro_url">
+        https://skip.guoxicheng.top/advance/layout-inspect/intro</string>
     <string name="inspect_floating_window_title">是否启用悬浮窗</string>
     <string name="inspect_floating_window_subtitle">通过悬浮窗执行布局检查</string>
 
@@ -48,7 +49,8 @@
     <string name="settings_strict_skip">跳过</string>
     <string name="settings_custom">自定义配置</string>
     <string name="settings_custom_subtitle">URL链接 / YAML文本 / JSON文本</string>
-    <string name="settings_custom_config_url">https://skip.guoxicheng.top/advance/custom-config/intro</string>
+    <string name="settings_custom_config_url">
+        https://skip.guoxicheng.top/advance/custom-config/intro</string>
     <string name="settings_background_task">后台任务隐藏</string>
     <string name="settings_background_task_subtitle">在「最近任务」列表隐藏应用</string>
     <string name="settings_function_intro">功能介绍</string>
@@ -59,6 +61,15 @@
     <string name="settings_theme_auto">跟随系统</string>
     <string name="settings_auto_update">自动更新</string>
     <string name="settings_auto_update_subtitle">定期自动检查更新版本</string>
+    <string name="settings_skip_log">日志记录</string>
+    <string name="settings_skip_log_subtitle">记录异常日志，便于问题排查</string>
+    <string name="settings_skip_log_page">日志记录详情</string>
+    <string name="settings_skip_log_page_subtitle">按天查看异常日志内容</string>
+    <string name="settings_skip_log_empty">暂无日志记录</string>
+    <string name="settings_skip_log_level">级别</string>
+    <string name="settings_skip_log_source">来源</string>
+    <string name="settings_skip_log_message">消息</string>
+    <string name="settings_skip_log_stack_trace">堆栈</string>
 
     <string name="about">关于</string>
     <string name="about_github_title">源代码</string>
@@ -116,6 +127,7 @@
     <string name="store_not_update">NOT_UPDATE</string>
     <string name="store_show_tutorial">SHOW_TUTORIAL</string>
     <string name="store_show_disclaimer">SHOW_DISCLAIMER</string>
+    <string name="store_skip_log">SKIP_LOG</string>
 
     <string name="notification_accessibility_service_running">无障碍服务运行中</string>
     <string name="notification_inspect_service_running">布局检查服务运行中</string>
