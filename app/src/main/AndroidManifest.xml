@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
 
     <application
@@ -29,6 +29,9 @@
             android:exported="false" />
         <activity
             android:name=".ui.settings.SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.settings.log.SkipLogActivity"
             android:exported="false" />
         <activity
             android:name=".ui.alive.AliveActivity"
@@ -71,7 +74,7 @@
         <service android:name=".service.FloatingWindowService"
             android:enabled="true"
             android:exported="false"
-            />
+        />
 
         <activity
             android:name=".ui.inspect.InspectActivity"

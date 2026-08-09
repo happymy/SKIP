@@ -23,9 +23,15 @@ import androidx.core.app.NotificationCompat
 import com.android.skip.R
 import com.android.skip.ui.inspect.start.StartInspectRepository
 import com.android.skip.ui.main.MainActivity
+import com.android.skip.ui.settings.log.SkipLogRepository
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ScreenUtils
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -36,12 +42,16 @@ class InspectService : Service() {
     private var mMediaProjection: MediaProjection? = null
     private var mProjectionManager: MediaProjectionManager? = null
     private var virtualDisplay: VirtualDisplay? = null
+    private val serviceScope = CoroutineScope(Dispatchers.Default + Job())
 
     @Inject
     lateinit var startInspectRepository: StartInspectRepository
 
     @Inject
     lateinit var accessibilityInspectRepository: AccessibilityInspectRepository
+
+    @Inject
+    lateinit var skipLogRepository: SkipLogRepository
 
     override fun onBind(intent: Intent): IBinder {
         TODO("Return the communication channel to the service.")
@@ -97,6 +107,7 @@ class InspectService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
+        serviceScope.cancel()
         mProjectionManager = null
         mMediaProjection?.stop()
         mMediaProjection = null
@@ -165,6 +176,14 @@ class InspectService : Service() {
                     outputStream.close()
                 } catch (e: IOException) {
                     LogUtils.e(e)
+                    serviceScope.launch {
+                        skipLogRepository.appendExceptionLog(
+                            level = "E",
+                            source = "InspectService#saveCapture",
+                            message = e.message ?: "save jpeg failed",
+                            throwable = null
+                        )
+                    }
                 }
 
                 accessibilityInspectRepository.stopCaptureScreen()

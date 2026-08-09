@@ -16,6 +16,7 @@ import com.android.skip.dataclass.NodeChildSchema
 import com.android.skip.dataclass.NodeRootSchema
 import com.android.skip.ui.alive.notificationbar.NotificationBarRepository
 import com.android.skip.ui.main.start.StartAccessibilityRepository
+import com.android.skip.ui.settings.log.SkipLogRepository
 import com.android.skip.ui.settings.strict.StrictRepository
 import com.android.skip.ui.settings.tip.TipRepository
 import com.android.skip.ui.whitelist.WhiteListRepository
@@ -67,6 +68,9 @@ class MyAccessibilityService : AccessibilityService() {
     lateinit var strictRepository: StrictRepository
 
     @Inject
+    lateinit var skipLogRepository: SkipLogRepository
+
+    @Inject
     lateinit var whiteListRepository: WhiteListRepository
 
     private val notificationBarObserver = Observer<Boolean> { enabled ->
@@ -101,7 +105,7 @@ class MyAccessibilityService : AccessibilityService() {
                         val rectStr = rect.toString()
                         if (!clickedRect.contains(rectStr)) {
                             withContext(Dispatchers.Main) {
-                                click(that, rect)
+                                click(that, rect, rootNodePackageName, rectStr)
                             }
                             clickedRect.add(rectStr)
                             LogUtils.d("clicked: packageName is $rootNodePackageName rect is $rectStr")
@@ -124,10 +128,23 @@ class MyAccessibilityService : AccessibilityService() {
             scanTimes++
         } catch (e: Exception) {
             LogUtils.e(e)
+            serviceScope.launch {
+                skipLogRepository.appendExceptionLog(
+                    level = "E",
+                    source = "MyAccessibilityService#onAccessibilityEvent",
+                    message = e.message ?: "onAccessibilityEvent exception",
+                    throwable = null
+                )
+            }
         }
     }
 
-    private fun click(accessibilityService: AccessibilityService, rect: Rect) {
+    private fun click(
+        accessibilityService: AccessibilityService,
+        rect: Rect,
+        packageName: String,
+        rectStr: String
+    ) {
         val path = Path()
         path.moveTo(rect.centerX().toFloat(), rect.centerY().toFloat())
 
@@ -142,6 +159,20 @@ class MyAccessibilityService : AccessibilityService() {
                     super.onCompleted(gestureDescription)
                     if (isShowTip) {
                         MyToast.show(R.string.toast_skip_tip)
+                    }
+                }
+
+                override fun onCancelled(gestureDescription: GestureDescription) {
+                    super.onCancelled(gestureDescription)
+                    val message = "gesture cancelled: package=$packageName rect=$rectStr"
+                    LogUtils.e(message)
+                    serviceScope.launch {
+                        skipLogRepository.appendExceptionLog(
+                            level = "E",
+                            source = "MyAccessibilityService#dispatchGesture",
+                            message = message,
+                            throwable = null
+                        )
                     }
                 }
             },
