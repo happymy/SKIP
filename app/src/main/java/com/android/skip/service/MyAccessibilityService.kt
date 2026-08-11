@@ -87,7 +87,7 @@ class MyAccessibilityService : AccessibilityService() {
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         try {
-            val rootNode = getCurrentRootNode()
+            val rootNode = rootInActiveWindow ?: return
 
             val rootNodePackageName = rootNode.packageName.toString()
             if (rootNodePackageName != appPackageName) {
@@ -166,14 +166,6 @@ class MyAccessibilityService : AccessibilityService() {
                     super.onCancelled(gestureDescription)
                     val message = "gesture cancelled: package=$packageName rect=$rectStr"
                     LogUtils.e(message)
-                    serviceScope.launch {
-                        skipLogRepository.appendExceptionLog(
-                            level = "E",
-                            source = "MyAccessibilityService#dispatchGesture",
-                            message = message,
-                            throwable = null
-                        )
-                    }
                 }
             },
             null
@@ -218,10 +210,6 @@ class MyAccessibilityService : AccessibilityService() {
             return true
         }
         return super.onKeyEvent(event)
-    }
-
-    private fun getCurrentRootNode(): AccessibilityNodeInfo {
-        return rootInActiveWindow ?: throw IllegalStateException("No valid root node available")
     }
 
     private fun isSystemClass(className: String): Boolean {
