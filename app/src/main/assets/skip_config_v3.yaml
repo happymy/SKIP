@@ -79,6 +79,10 @@
       activityName: com.zhihu.android.app.ui.activity.LauncherActivity
       file: fileId=812b304e-63fd-42da-b200-7497a2e635c4&nodeId=21
       desc: 开屏广告
+  skipBounds:
+    - bound: 988,339,1108,459
+      activityName: com.zhihu.android.app.ui.activity.LauncherActivity
+      desc: 红米K90圆形开屏广告
 
 - appName: 帆书
   packageName: io.dushu.fandengreader
